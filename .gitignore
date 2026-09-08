@@ -6,7 +6,7 @@ __pycache__/
 
 # Data
 data/bronze/*
-data/quality_reports/
+data/quality_reports/*
 !data/quality_reports/.gitkeep
 data/silver/*
 data/gold/*
