@@ -1,0 +1,4 @@
+rule,failed_count
+TOTAL,0
+driver_id_not_null,0
+driver_id_unique,0

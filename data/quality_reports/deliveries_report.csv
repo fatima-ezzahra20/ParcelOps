@@ -1,0 +1,7 @@
+rule,failed_count
+TOTAL,0
+delivery_id_not_null,0
+delivery_id_unique,0
+customer_id_not_null,0
+valid_window,0
+weight_positive,0

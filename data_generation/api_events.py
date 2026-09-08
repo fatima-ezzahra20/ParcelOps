@@ -21,7 +21,7 @@ from fastapi import FastAPI, Query
 
 app = FastAPI(title="ParcelOps - Delivery Events API")
 
-EVENTS_FILE = "data/bronze_raw_events.json"
+EVENTS_FILE = "data/bronze/bronze_raw_events.json"
 
 
 def load_events():

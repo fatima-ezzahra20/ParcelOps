@@ -12,7 +12,7 @@ import pandas as pd
 
 from ingestion.utils import log_ingestion
 
-SOURCE_CSV = "data/bronze_raw_drivers.csv"
+SOURCE_CSV = "data/bronze/bronze_raw_drivers.csv"
 
 
 def extract_drivers():

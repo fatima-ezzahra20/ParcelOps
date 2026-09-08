@@ -1,0 +1,8 @@
+rule,failed_count
+TOTAL,56
+event_id_not_null,0
+event_not_duplicate,15
+valid_status,0
+timestamp_not_future,18
+delivery_id_exists,8
+driver_id_not_null,24
