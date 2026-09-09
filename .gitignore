@@ -5,6 +5,7 @@ __pycache__/
 .env
 
 # Data
+data/watermark.json
 data/bronze/*
 data/quality_reports/*
 !data/quality_reports/.gitkeep
