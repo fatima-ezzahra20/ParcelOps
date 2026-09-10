@@ -1,8 +1,12 @@
 """
-extract_events.py (version incrémentale)
+extract_events.py (version incrémentale, URL configurable)
 
 Utilise le paramètre ?since= de l'API pour ne récupérer que les événements
 plus récents que le dernier watermark connu.
+
+L'URL de l'API est configurable via la variable d'environnement EVENTS_API_URL
+(utile car depuis un container Docker, 'localhost' ne pointe pas vers la
+machine hôte -> on utilise host.docker.internal dans ce cas).
 """
 
 import os
@@ -14,7 +18,7 @@ import requests
 from ingestion.utils import log_ingestion
 from ingestion.watermark import get_watermark, set_watermark
 
-API_URL = "http://localhost:8000/delivery_events"
+API_URL = os.getenv("EVENTS_API_URL", "http://localhost:8000/delivery_events")
 
 
 def extract_events():
@@ -37,14 +41,9 @@ def extract_events():
         if len(df) > 0:
             df["ingested_at"] = ingested_at
             df.to_parquet(output_path, index=False)
-            new_watermark = pd.to_datetime(
-                df["status_timestamp"],
-                format="ISO8601"
-            ).max()
+            new_watermark = pd.to_datetime(df["status_timestamp"]).max()
             set_watermark("events", new_watermark.isoformat())
         else:
-            # Aucun nouvel événement : on écrit quand même un fichier vide
-            # pour garder une trace de ce run (utile pour le monitoring)
             pd.DataFrame(columns=["event_id"]).to_parquet(output_path, index=False)
 
         log_ingestion("delivery_events", len(df), status="SUCCESS")
